@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Lockin-O-Clock/static/css/main.99a9607f.css",
+    "main.js": "/Lockin-O-Clock/static/js/main.3c5e8838.js",
+    "index.html": "/Lockin-O-Clock/index.html",
+    "main.99a9607f.css.map": "/Lockin-O-Clock/static/css/main.99a9607f.css.map",
+    "main.3c5e8838.js.map": "/Lockin-O-Clock/static/js/main.3c5e8838.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.99a9607f.css",
+    "static/js/main.3c5e8838.js"
+  ]
+}
