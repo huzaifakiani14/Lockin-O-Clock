@@ -1,70 +1,132 @@
-# Getting Started with Create React App
+# Lockin-O-Clock 🕒
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, user-friendly Pomodoro timer application built with React to boost your productivity. Stay focused and track your work sessions with this elegant and intuitive timer app.
 
-## Available Scripts
+## 🌟 Features
 
-In the project directory, you can run:
+- **Pomodoro Timer**
+  - 25-minute work sessions
+  - 5-minute short breaks
+  - 15-minute long breaks
+  - Customizable timer settings
 
-### `npm start`
+- **User Experience**
+  - Clean, modern UI with dark theme
+  - Visual progress indicator
+  - Audio notifications for session completion
+  - Motivational quotes that change based on timer state
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Productivity Tools**
+  - Session tracking
+  - Statistics for daily, monthly, and yearly productivity
+  - Persistent settings and preferences
+  - Mobile-responsive design
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Technologies Used
 
-### `npm test`
+- **Frontend Framework**
+  - React.js
+  - Create React App
+  - CSS3 with modern styling features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Authentication**
+  - Google OAuth integration
+  - JWT token handling
 
-### `npm run build`
+- **State Management**
+  - React Hooks (useState, useEffect, useCallback)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Deployment**
+  - Vercel
+  - GitHub Pages
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🚀 Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
 
-### `npm run eject`
+- Node.js (v14 or higher)
+- npm or yarn package manager
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Installation
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/huzaifakiani14/Lockin-O-Clock.git
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Navigate to the project directory:
+   ```bash
+   cd Lockin-O-Clock
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Learn More
+4. Create a `.env` file in the root directory and add your Google OAuth client ID:
+   ```
+   REACT_APP_GOOGLE_CLIENT_ID=your_google_client_id_here
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+5. Start the development server:
+   ```bash
+   npm start
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The app will open in your default browser at `http://localhost:3000`.
 
-### Code Splitting
+## 🔧 Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Google OAuth Setup
 
-### Analyzing the Bundle Size
+1. Go to the [Google Cloud Console](https://console.cloud.google.com)
+2. Create a new project or select an existing one
+3. Enable the Google+ API
+4. Create OAuth 2.0 credentials
+5. Add authorized JavaScript origins:
+   - `http://localhost:3000` (for development)
+   - `https://lockin-o-clock.vercel.app` (for production)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📱 Usage
 
-### Making a Progressive Web App
+1. **Start a Work Session**
+   - Click the play button to begin a 25-minute work session
+   - Focus on your task until the timer completes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+2. **Take Breaks**
+   - After each work session, take a 5-minute break
+   - Every 4 work sessions, take a longer 15-minute break
 
-### Advanced Configuration
+3. **Track Progress**
+   - View your productivity statistics
+   - Monitor your daily, monthly, and yearly progress
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+4. **Customize Settings**
+   - Adjust timer durations
+   - Modify break intervals
+   - Change the number of sessions before long breaks
 
-### Deployment
+## 🌐 Live Demo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Visit [lockin-o-clock.vercel.app](https://lockin-o-clock.vercel.app) to try the app live!
 
-### `npm run build` fails to minify
+## 🤝 Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 👤 Author
+
+- **Huzaifa Kiani**
+  - GitHub: [@huzaifakiani14](https://github.com/huzaifakiani14)
+  - LinkedIn: [Huzaifa Kiani](https://www.linkedin.com/in/huzaifa-kiani-14/)
+
+## 🙏 Acknowledgments
+
+- React.js community for the amazing framework
+- Vercel for the deployment platform
+- Google for OAuth integration
