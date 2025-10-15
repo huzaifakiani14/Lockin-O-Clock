@@ -29,8 +29,8 @@ const QUOTES = {
   ]
 };
 
-// Key for storing user stats in localStorage
-const STATS_STORAGE_KEY = 'lockin_stats';
+// Key for storing user settings in localStorage
+const SETTINGS_STORAGE_KEY = 'lockin_settings';
 
 function App() {
   // Timer settings - all times in seconds
@@ -255,95 +255,6 @@ function App() {
     }
   }, [isRunning, isWorkMode]);
 
-  // Statistics tracking states
-  const [showStats, setShowStats] = useState(false);
-  const [stats, setStats] = useState(() => {
-    const saved = localStorage.getItem(STATS_STORAGE_KEY);
-    return saved ? JSON.parse(saved) : {
-      daily: 0,
-      monthly: 0,
-      yearly: 0,
-      lastUpdate: new Date().toISOString()
-    };
-  });
-
-  // Track completed work sessions to avoid double counting
-  const [lastCompletedCycle, setLastCompletedCycle] = useState(0);
-
-  // Update statistics when a work session completes
-  useEffect(() => {
-    // Only track when we transition from work to break (session completed)
-    if (!isWorkMode && cycles > lastCompletedCycle && cycles > 0) {
-      const now = new Date();
-      const lastUpdate = new Date(stats.lastUpdate);
-      
-      // Reset counters if we're in a new time period
-      if (now.getDate() !== lastUpdate.getDate()) {
-        setStats(prev => ({ ...prev, daily: 0 }));
-      }
-      if (now.getMonth() !== lastUpdate.getMonth()) {
-        setStats(prev => ({ ...prev, monthly: 0 }));
-      }
-      if (now.getFullYear() !== lastUpdate.getFullYear()) {
-        setStats(prev => ({ ...prev, yearly: 0 }));
-      }
-
-      // Add completed session time to all relevant counters
-      const workTimeInMinutes = settings.workTime / 60;
-      setStats(prev => ({
-        ...prev,
-        daily: prev.daily + workTimeInMinutes,
-        monthly: prev.monthly + workTimeInMinutes,
-        yearly: prev.yearly + workTimeInMinutes,
-        lastUpdate: now.toISOString()
-      }));
-      
-      // Update the last completed cycle to avoid double counting
-      setLastCompletedCycle(cycles);
-    }
-  }, [isWorkMode, cycles, lastCompletedCycle, settings.workTime, stats.lastUpdate]);
-
-  // Save statistics to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem(STATS_STORAGE_KEY, JSON.stringify(stats));
-  }, [stats]);
-
-  // Format time for statistics display (hours and minutes)
-  const formatStatsTime = (minutes) => {
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return `${hours}h ${mins}m`;
-  };
-
-  // Statistics Modal Component - shows user's focus time stats
-  const StatsModal = () => (
-    <div className="stats-modal">
-      <div className="stats-content">
-        <div className="stats-header">
-          <h2>Your Lockin Stats</h2>
-          <button className="close-btn" onClick={() => setShowStats(false)}>×</button>
-        </div>
-        <div className="stats-grid">
-          <div className="stat-item">
-            <span className="stat-label">Today's Focus</span>
-            <span className="stat-value">{formatStatsTime(stats.daily)}</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">This Month</span>
-            <span className="stat-value">{formatStatsTime(stats.monthly)}</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">This Year</span>
-            <span className="stat-value">{formatStatsTime(stats.yearly)}</span>
-          </div>
-        </div>
-        <div className="stats-motivation">
-          <p>{QUOTES.motivation[Math.floor(Math.random() * QUOTES.motivation.length)]}</p>
-        </div>
-      </div>
-    </div>
-  );
-
   // Login Screen Component - handles user authentication
   const LoginScreen = () => (
     <div className="login-screen">
@@ -386,13 +297,6 @@ function App() {
           {userName && <span className="user-greeting">Welcome, {userName}</span>}
         </div>
         <div className="nav-right">
-          <button 
-            className="nav-btn"
-            onClick={() => setShowStats(true)}
-            title="Stats"
-          >
-            📊
-          </button>
           <button 
             className="nav-btn"
             onClick={() => setShowSettings(!showSettings)}
@@ -445,7 +349,6 @@ function App() {
                   setTimeLeft(settings.workTime);
                   setIsWorkMode(true);
                   setCycles(0);
-                  setLastCompletedCycle(0);
                   stopAlarm();
                 }}
                 title="Reset"
@@ -532,16 +435,16 @@ function App() {
 
       {/* Spotify player */}
       {showSpotify && (
-        <div 
-          className="spotify-player" 
+        <div
+          className="spotify-player"
           onClick={(e) => e.stopPropagation()}
           onMouseDown={(e) => e.stopPropagation()}
           onMouseUp={(e) => e.stopPropagation()}
         >
           <div className="spotify-header">
             <span>Lofi Beats</span>
-            <button 
-              className="close-btn" 
+            <button
+              className="close-btn"
               onClick={(e) => {
                 e.stopPropagation();
                 toggleSpotify();
@@ -550,7 +453,8 @@ function App() {
               ×
             </button>
           </div>
-          <div 
+          <div
+            className="spotify-iframe-container"
             onClick={(e) => e.stopPropagation()}
             onMouseDown={(e) => e.stopPropagation()}
             onMouseUp={(e) => e.stopPropagation()}
@@ -563,13 +467,13 @@ function App() {
               frameBorder="0"
               allowtransparency="true"
               allow="encrypted-media"
+              loading="lazy"
             />
           </div>
         </div>
       )}
 
       {/* Stats modal */}
-      {showStats && <StatsModal />}
     </div>
   );
 
